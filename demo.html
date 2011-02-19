@@ -1,0 +1,61 @@
+<html>
+<head>
+  <title>Sparkline Demo</title>  
+  <style type="text/css">
+    body {
+      background: #CCC;
+    }
+    .sparklines {
+      font-size: small;
+      font-family: Veranda, Helvetica, 'Bitstream Vera Sans', Arial, sans-serif;
+      font-style: italic;
+      vertical-align: 50%;
+      margin: auto 2px auto 2px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script language="javascript" type="text/javascript" src="3rd/jquery-1.5.js"></script>
+  <script language="javascript" type="text/javascript" src="lib/sparkline.js"></script>
+
+  <h1>Sparkline Demo</h1>
+
+  <p>
+  This is a sparkline, updating every second:
+  <div id="charts" style="width:750;height:100;"></div>
+  </p>
+
+  <script id="source">
+  $(function() {
+    var s = new Sparkline($('#charts'), {
+      width: 150,
+      height: 30,
+      color: '#F00',
+      bgColor: '#CCC',
+    });
+
+    var data = [[]];
+    var last = 100;
+    function addPt() {
+      last += (Math.random() - 0.5) * 5.0;
+      data.push([data.length, last]);
+    }
+    for(i=0; i<600; i++) {
+      addPt();
+    }
+    
+    function reload() {
+      addPt();
+      data.shift();
+      s.plot(data);
+      setTimeout(reload, 1000);
+    }
+    reload();
+
+  });
+  </script>
+</body>
+
+</html>
