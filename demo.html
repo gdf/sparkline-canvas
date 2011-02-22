@@ -5,7 +5,7 @@
     body {
       background: #CCC;
     }
-    .sparklines {
+    .sparkline {
       font-size: small;
       font-family: Veranda, Helvetica, 'Bitstream Vera Sans', Arial, sans-serif;
       font-style: italic;
@@ -22,18 +22,29 @@
 
   <h1>Sparkline Demo</h1>
 
-  <p>
-  This is a sparkline, updating every second:
-  <div id="charts" style="width:750;height:100;"></div>
-  </p>
+  <p>Samples, updating every second:</p>
+
+  <div id="charts" style="width:100%; height:100%;"></div>
+
 
   <script id="source">
   $(function() {
-    var s = new Sparkline($('#charts'), {
+    function addChart(opts) {
+      var div = $('<div>').attr('style', 'clear:both; margin: 10px 10px 10px 10px;');
+      div.appendTo($('#charts'));
+      return new Sparkline(div, opts); 
+    }
+    var s = addChart({
       width: 150,
       height: 30,
       color: '#F00',
       bgColor: '#CCC',
+    });
+    var s2 = addChart({
+      width: 150, height: 30,
+      color: '#AAA',
+      bgColor: '#FFF',
+      transformFn: function(y) { return 1.0/y; },
     });
 
     var data = [[]];
@@ -50,6 +61,8 @@
       addPt();
       data.shift();
       s.plot(data);
+      s2.plot(data);
+      
       setTimeout(reload, 1000);
     }
     reload();
