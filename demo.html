@@ -29,22 +29,29 @@
 
   <script id="source">
   $(function() {
+    var c = [];
     function addChart(opts) {
       var div = $('<div>').attr('style', 'clear:both; margin: 10px 10px 10px 10px;');
       div.appendTo($('#charts'));
-      return new Sparkline(div, opts); 
+      c.push(new Sparkline(div, opts)); 
     }
-    var s = addChart({
+    addChart({
       width: 150,
       height: 30,
       color: '#F00',
       bgColor: '#CCC',
     });
-    var s2 = addChart({
+    addChart({
       width: 150, height: 30,
       color: '#AAA',
       bgColor: '#FFF',
       transformFn: function(y) { return 1.0/y; },
+    });
+    addChart({
+      width: 150, height: 30,
+      color: '#00F',
+      bgColor: '#333',
+      useBars: true, 
     });
 
     var data = [[]];
@@ -60,9 +67,7 @@
     function reload() {
       addPt();
       data.shift();
-      s.plot(data);
-      s2.plot(data);
-      
+      c.forEach(function(x) { x.plot(data); });
       setTimeout(reload, 1000);
     }
     reload();
