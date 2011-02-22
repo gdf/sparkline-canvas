@@ -13,6 +13,7 @@ Options
 * width, height: size of chart
 * color: color to use to draw line/bars
 * bgColor: background color for chart
+* lastColor: if defined, an indicator of this color will be added for the most recent value
 * useBars: if true, chart will be drawn as histogram/bar chart
 * transformFn: a function to by applied to every value before plotting
 
