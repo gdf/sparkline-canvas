@@ -70,14 +70,16 @@
     var last = 100;
     function addPt() {
       last += (Math.random() - 0.5) * 5.0;
-      data.push([data.length, last]);
+      data.push([new Date() + 0, last]);
     }
     for(i=0; i<600; i++) {
       addPt();
     }
     
     function reload() {
-      addPt();
+      if (Math.random() > 0.1) { // occasionally skip a point
+        addPt();
+      }
       data.shift();
       c.forEach(function(x) { x.plot(data); });
       setTimeout(reload, 1000);

@@ -5,16 +5,21 @@ A simple javascript library for drawing [sparklines](http://en.wikipedia.org/wik
 
 Requires jquery.
 
-See demo.html for an example.
-
-Options
+Example
 -------
 
-* width, height: size of chart
-* color: color to use to draw line/bars
-* bgColor: background color for chart
-* lastColor: if defined, an indicator of this color will be added for the most recent value
-* quartilesColor: if defined, draw indicators for the median and 1st/3rd quartiles 
-* useBars: if true, chart will be drawn as histogram/bar chart
-* transformFn: a function to by applied to every value before plotting
+See also demo.html for a working example.
+
+  var sparkline = new Sparkline($('#charts'), {
+    width: 150, height: 30, // size of the chart
+    color: '#00F',          // color of the line/bars
+    bgColor: '#000',        // background color for chart
+    lastColor: '#F00',      // (optional) draw indicator of this color at most recent value
+    quartilesColor: '#999', // (optional) draw lines of this color at median and 1st/3rd quartiles
+    useBars: false,         // if true, chart will be drawn as histogram/bar chart
+    transformFn: function(y) { return y; }, // fn to be applied to every value before plotting 
+  });
+  var data [ [0,2], [1,5], [2,1], [3,5], [4,0], [5,4], [6,9], /* ... */ ];
+  sparkline.plot(data);
+
 
