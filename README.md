@@ -16,6 +16,7 @@ See also demo.html for a working example.
     bgColor: '#000',        // background color for chart
     lastColor: '#F00',      // (optional) draw indicator of this color at most recent value
     quartilesColor: '#999', // (optional) draw lines of this color at median and 1st/3rd quartiles
+    medianColor: '#333',    // (optional) draw line at just the median
     useBars: false,         // if true, chart will be drawn as histogram/bar chart
     transformFn: function(y) { return y; }, // fn to be applied to every value before plotting 
   });
